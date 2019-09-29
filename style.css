@@ -1,0 +1,405 @@
+:root {
+  --color-bg-light: #8b4367;
+  --color-bg-dark: #543864;
+  --color-primary: #ff6464;
+  --color-secondary: #01024e;
+  --color-font: #fffd7d;
+}
+
+html {
+  height: 100%;
+  background: linear-gradient(var(--color-secondary), var(--color-bg-dark));
+  background-attachment: fixed;
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 62.5%;
+}
+
+body {
+  width: 80%;
+  margin: auto;
+}
+
+button {
+  padding: 0;
+
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+/* ------------------------ HEADER */
+
+header {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  grid-column-gap: 2rem;
+
+  margin-bottom: 4rem;
+}
+
+h1 {
+  margin-bottom: 0;
+
+  font-size: 8rem;
+  font-weight: 100;
+  color: var(--color-primary);
+}
+
+.newBtn {
+  justify-self: left;
+  align-self: flex-end;
+  height: 70%;
+
+  font-size: 8rem;
+  font-weight: 100;
+  color: var(--color-font);
+
+  opacity: 0;
+  transform: translateX(20rem);
+  transition: all 0.3s ease-in;
+}
+
+header:hover .newBtn {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ---------------------- filter */
+
+nav {
+  padding-left: 2rem;
+}
+
+.filterBtn {
+  display: inline-block;
+  margin-right: 3rem;
+  margin-bottom: 4rem;
+  padding: 0.5rem;
+  padding-left: 1rem;
+  position: relative;
+
+  font-size: 2rem;
+  font-weight: 200;
+  color: var(--color-primary);
+
+  transition: all 0.2s ease-in;
+}
+
+.filterBtn:hover {
+  transform: scale(1.1);
+  color: var(--color-font);
+}
+
+.active::before {
+  content: "";
+  width: 100%;
+  height: 1rem;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  background-color: transparent;
+  border-bottom: 1px solid var(--color-primary);
+  border-left: 1px solid var(--color-primary);
+}
+
+.active {
+  font-size: 2.5rem !important;
+  transform: scale(1.1) !important;
+  color: var(--color-font);
+}
+
+/* ---------------------- CARD */
+main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  grid-gap: 5rem;
+  justify-items: center;
+}
+
+article {
+  width: 70%;
+  position: relative;
+  padding: 2rem;
+
+  transition: all 0.2s ease-in;
+}
+
+article::before {
+  content: "";
+  width: 12rem;
+  height: 8rem;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  background-color: transparent;
+  border-top: 1px solid var(--color-primary);
+  border-left: 1px solid var(--color-primary);
+
+  transition: all 0.2s ease-in;
+}
+
+article::after {
+  content: "";
+  width: 12rem;
+  height: 8rem;
+
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+  background-color: transparent;
+  border-bottom: 1px solid var(--color-primary);
+  border-right: 1px solid var(--color-primary);
+  z-index: -1;
+
+  transition: all 0.2s ease-in;
+}
+
+article:hover:after,
+article:hover:before {
+  width: calc(100% - 1px);
+  height: calc(100% - 1px);
+}
+
+h2 {
+  margin: 0;
+
+  font-size: 2.5rem;
+  font-weight: 200;
+  color: var(--color-font);
+  text-transform: uppercase;
+}
+
+p {
+  font-size: 1.7rem;
+  font-weight: 200;
+  color: var(--color-font);
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  grid-gap: 1rem;
+}
+
+.deleteBtn {
+  width: 2.5rem;
+  height: 2.5rem;
+
+  font-size: 1.5rem;
+  font-weight: 200;
+  color: var(--color-font);
+  text-align: center;
+
+  border: 1px solid var(--color-font);
+  border-radius: 50%;
+  transform: scale(1);
+  z-index: 150;
+
+  transition: all 0.1s ease-in;
+}
+
+.deleteBtn:first-child {
+  justify-self: right;
+}
+
+.deleteBtn:last-child {
+  justify-self: right;
+}
+
+.deleteBtn:hover {
+  transform: scale(1.2);
+}
+
+.deleteBtn p {
+  margin: 0;
+  padding: 0;
+  transform: translate(-0.05rem, -0.1rem);
+}
+
+/* ---------------- FORM */
+
+form {
+  display: block;
+  width: 50rem;
+  padding: 3rem;
+  margin: 0 auto 10rem auto;
+
+  border: 1px solid var(--color-primary);
+  box-shadow: 12px 12px 20px 2px rgba(0, 0, 0, 0.274);
+}
+
+/* ---------------- FORM */
+
+.form-group {
+  margin-bottom: 2rem;
+}
+
+/* --------input */
+input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid var(--color-font);
+
+  font-family: inherit;
+  font-size: 3rem;
+  font-weight: 200;
+  color: var(--color-font);
+  outline: none;
+
+  transition: all 0.2s ease-in;
+}
+
+input:focus {
+  border-bottom: 1px solid var(--color-primary);
+}
+
+input::placeholder {
+  font-family: inherit;
+  font-size: 3rem;
+  font-weight: 100;
+  color: var(--color-font);
+}
+
+/* --------label */
+label {
+  font-size: 1.3rem;
+  font-weight: 200;
+  color: var(--color-font);
+}
+
+.text-label {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  transition: all 0.2s ease-in;
+  color: var(--color-primary);
+  font-weight: 400;
+}
+
+input:placeholder-shown + .text-label {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-1rem);
+}
+
+/* --------radio */
+
+.radio1,
+.radio2 {
+  display: inline-block;
+  margin-right: 2rem;
+}
+
+.radio-input {
+  display: none;
+}
+
+.radio-label {
+  position: relative;
+  font-size: 3rem;
+  padding-left: 3rem;
+  cursor: pointer;
+}
+
+.radio-button {
+  height: 2rem;
+  width: 2rem;
+  border: 1px solid var(--color-font);
+  border-radius: 50%;
+  display: inline-block;
+  position: absolute;
+  top: 0.7rem;
+  left: 0;
+}
+
+.radio-button::after {
+  content: "";
+  display: block;
+  height: 1.3rem;
+  width: 1.3rem;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--color-font);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.radio-input:checked ~ .radio-label .radio-button::after {
+  opacity: 1;
+}
+
+/* --------button */
+
+.addBtn {
+  display: block;
+  width: 12rem;
+  height: 6rem;
+  position: relative;
+  margin: auto;
+  margin-top: 5rem;
+  margin-bottom: -2rem;
+
+  font-size: 4rem;
+  font-weight: 100;
+  color: var(--color-font);
+}
+
+.addBtn::before {
+  content: "";
+  width: 6rem;
+  height: 3rem;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  background-color: transparent;
+  border-top: 1px solid var(--color-font);
+  border-left: 1px solid var(--color-font);
+
+  transition: all 0.2s ease-in;
+}
+
+.addBtn::after {
+  content: "";
+  width: 6rem;
+  height: 3rem;
+
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+  background-color: transparent;
+  border-bottom: 1px solid var(--color-font);
+  border-right: 1px solid var(--color-font);
+
+  transition: all 0.2s ease-in;
+}
+
+.addBtn:hover {
+  color: var(--color-primary);
+}
+
+.addBtn:active {
+  transform: translateY(0.5rem) scale(0.95);
+}
+
+.addBtn:hover:after,
+.addBtn:hover:before {
+  width: 11.9rem;
+  height: 5.9rem;
+}
+
+/* --------utility classes */
+
+.hidden {
+  display: none;
+}
