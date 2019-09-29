@@ -5,6 +5,9 @@ const form = document.querySelector("form");
 const filterAllBtn = document.querySelector(".filterAllBtn");
 const filterWorkBtn = document.querySelector(".filterWorkBtn");
 const filterPlayBtn = document.querySelector(".filterPlayBtn");
+const allTasks = [];
+let currentTasks = [];
+
 get();
 
 // HIDING AND DISPLAYING THE FORM
@@ -36,13 +39,25 @@ function get() {
   })
     .then(res => res.json())
     .then(tasks => {
-      tasks.forEach(addTaskToDom);
+      tasks.forEach(task => {
+        allTasks.push(task);
+      });
+      rebuildList();
     });
+}
+
+function rebuildList() {
+  currentTasks = allTasks;
+  buildList(currentTasks);
+}
+
+function buildList(tasks) {
+  document.querySelector("main").innerHTML = "";
+  tasks.forEach(addTaskToDom);
 }
 
 //ADDING FETCHED TASK TO DOM
 function addTaskToDom(task) {
-  console.log(task);
   const clone = document.querySelector("template").content.cloneNode(true);
 
   clone.querySelector("article").dataset.id = task._id;
@@ -53,6 +68,7 @@ function addTaskToDom(task) {
 
   clone.querySelector(".deleteBtn").addEventListener("click", () => {
     deleteIt(task._id);
+    currentTasks.pop(task);
   });
 
   document.querySelector("main").prepend(clone);
@@ -79,8 +95,8 @@ function post() {
     .then(res => res.json())
     .then(data => {
       //   window.location = "";
-
-      addTaskToDom(data);
+      allTasks.push(data);
+      buildList(allTasks);
     });
   form.elements.name.value = "";
   form.elements.time.value = "";
@@ -108,10 +124,44 @@ function deleteIt(id) {
 
 //FILTERING
 
-filterAllBtn.addEventListener("click", filterList);
+filterAllBtn.addEventListener("click", filterListAll);
+filterWorkBtn.addEventListener("click", filterListWork);
+filterPlayBtn.addEventListener("click", filterListPlay);
 
-function filterList() {
+function filterListAll() {
   filterAllBtn.classList.add("active");
   filterPlayBtn.classList.remove("active");
   filterWorkBtn.classList.remove("active");
+  buildList(allTasks);
+}
+
+function filterListWork() {
+  filterWorkBtn.classList.add("active");
+  filterAllBtn.classList.remove("active");
+  filterPlayBtn.classList.remove("active");
+
+  currentTasks = allTasks.filter(filterByWork);
+  function filterByWork(task) {
+    if (task.workorplay === "work") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  buildList(currentTasks);
+}
+
+function filterListPlay() {
+  filterPlayBtn.classList.add("active");
+  filterAllBtn.classList.remove("active");
+  filterWorkBtn.classList.remove("active");
+  currentTasks = allTasks.filter(filterByPlay);
+  function filterByPlay(task) {
+    if (task.workorplay === "play") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  buildList(currentTasks);
 }
